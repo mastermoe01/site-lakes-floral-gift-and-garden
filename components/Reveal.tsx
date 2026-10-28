@@ -5,7 +5,9 @@ import type { ReactNode } from "react";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-/** Settle into place as content enters the viewport. Plain markup under reduced motion. */
+/** Settle into place as content enters the viewport. Motion only — never opacity, so
+ *  content is visible even when the in-view signal never fires (full-page screenshots,
+ *  in-app browsers, background tabs). Plain markup under reduced motion. */
 export default function Reveal({
   children,
   delay = 0,
@@ -26,10 +28,10 @@ export default function Reveal({
   return (
     <M
       className={className}
-      initial={{ opacity: 0, y: 18 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ y: 18 }}
+      whileInView={{ y: 0 }}
       viewport={{ once: true, margin: "0px 0px -8% 0px" }}
-      transition={{ duration: 0.8, ease, delay }}
+      transition={{ duration: 0.9, ease, delay }}
     >
       {children}
     </M>
