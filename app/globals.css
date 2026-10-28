@@ -1,0 +1,166 @@
+@import "tailwindcss";
+
+/* Design tokens — sampled from the client's Winter DIY flyer (evergreen #4b5443, spruce
+   #272c25, linen #f3f2ee, sage #d5d7ca) and the storefront's cedar fascia (#a75945).
+   See clients/lakes-floral-gift-and-garden/design-brief.md in the studio repo. */
+@theme {
+  --color-linen: #f3f2ee;
+  --color-linen-deep: #e9e8e1;
+  --color-sage: #d5d7ca;
+  --color-spruce: #272c25;
+  --color-spruce-deep: #1c201b;
+  --color-evergreen: #4b5443;
+  --color-evergreen-strong: #3b4335;
+  --color-ink: #1f231d;
+  --color-muted: #5f6658;
+  --color-line: #d9d8cf;
+  --color-cedar: #a75945;
+  --color-cedar-soft: #c17045;
+
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-sans: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+
+  --ease-settle: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  background: var(--color-linen);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background: var(--color-linen);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+::selection {
+  background: var(--color-evergreen);
+  color: var(--color-linen);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-cedar);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+@layer components {
+  .wrap {
+    width: 100%;
+    max-width: 1240px;
+    margin-inline: auto;
+    padding-inline: 20px;
+  }
+  @media (min-width: 768px) {
+    .wrap {
+      padding-inline: 40px;
+    }
+  }
+
+  .label {
+    font-family: var(--font-sans);
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .display {
+    font-family: var(--font-display);
+    font-variation-settings: "SOFT" 50, "opsz" 144;
+    font-weight: 450;
+    letter-spacing: -0.02em;
+    line-height: 1.02;
+  }
+
+  .kicker {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--color-cedar);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    min-height: 48px;
+    padding: 0 1.4rem;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 15.5px;
+    letter-spacing: 0.01em;
+    transition:
+      background-color 0.25s var(--ease-settle),
+      color 0.25s var(--ease-settle),
+      border-color 0.25s var(--ease-settle),
+      transform 0.25s var(--ease-settle);
+  }
+  .btn:active {
+    transform: translateY(1px);
+  }
+  .btn-primary {
+    background: var(--color-evergreen);
+    color: var(--color-linen);
+  }
+  .btn-primary:hover {
+    background: var(--color-spruce);
+  }
+  .btn-ghost {
+    border: 1.5px solid var(--color-evergreen);
+    color: var(--color-evergreen-strong);
+  }
+  .btn-ghost:hover {
+    background: var(--color-evergreen);
+    color: var(--color-linen);
+  }
+  .btn-light {
+    background: var(--color-linen);
+    color: var(--color-spruce);
+  }
+  .btn-light:hover {
+    background: var(--color-sage);
+  }
+  .btn-outline-light {
+    border: 1.5px solid color-mix(in srgb, var(--color-linen) 55%, transparent);
+    color: var(--color-linen);
+  }
+  .btn-outline-light:hover {
+    background: var(--color-linen);
+    color: var(--color-spruce);
+  }
+
+  .link {
+    color: var(--color-evergreen-strong);
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--color-cedar) 60%, transparent);
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1.5px;
+    transition: text-decoration-color 0.2s;
+  }
+  .link:hover {
+    text-decoration-color: var(--color-cedar);
+  }
+
+  .prose-lf p + p {
+    margin-top: 1rem;
+  }
+}
+
+/* Grain: a whisper of paper texture on linen sections. Pure CSS, no image request. */
+.paper {
+  background-color: var(--color-linen);
+  background-image: radial-gradient(color-mix(in srgb, var(--color-spruce) 5%, transparent) 0.6px, transparent 0.7px);
+  background-size: 5px 5px;
+}
